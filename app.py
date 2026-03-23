@@ -7,7 +7,7 @@ from flask import Flask, render_template_string, request, send_file, after_this_
 
 app = Flask(__name__)
 
-# Interfaz visual de ULTRA TECNOLOGÍA - VERSIÓN RICO V2
+# Interfaz visual de ULTRA TECNOLOGÍA - VERSIÓN RICO V2 + ADSTERRA
 HTML = """
 <!DOCTYPE html>
 <html lang="es">
@@ -182,6 +182,9 @@ HTML = """
             btn.innerText = "DESCARGANDO...";
         }
     </script>
+
+    <!-- CONFIGURACIÓN DE PUBLICIDAD ADSTERRA (POPUNDER) -->
+    <script src="https://pl28962344.profitablecpmratenetwork.com/68/b1/10/68b110ce512cc50b2142462cc630aaba.js"></script>
 </body>
 </html>
 """
@@ -200,7 +203,7 @@ def process():
     
     try:
         if 'tiktok.com' in url.lower():
-            # API Directa
+            # API Directa de Extracción
             api_url = f"https://www.tikwm.com/api/?url={url}"
             req = urllib.request.Request(api_url, headers={'User-Agent': 'Mozilla/5.0'})
             
@@ -233,4 +236,5 @@ def process():
         return f"Error en el servidor: {str(e)}", 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    # Nota: En Render se usará Gunicorn, este bloque es para local
+    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
