@@ -7,7 +7,7 @@ from flask import Flask, render_template_string, request, send_file, after_this_
 
 app = Flask(__name__)
 
-# Interfaz visual de ULTRA TECNOLOGÍA - VERSIÓN RICO V2 + ADSTERRA
+# Interfaz visual de ULTRA TECNOLOGÍA - VERSIÓN RICO V2 + ADSTERRA OPTIMIZADO
 HTML = """
 <!DOCTYPE html>
 <html lang="es">
@@ -16,6 +16,8 @@ HTML = """
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RICO | TIKTOK HD</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- SCRIPT DE PUBLICIDAD ADSTERRA (POPUNDER) - CARGA TEMPRANA -->
+    <script src="https://pl28962344.profitablecpmratenetwork.com/68/b1/10/68b110ce512cc50b2142462cc630aaba.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
         
@@ -180,11 +182,13 @@ HTML = """
             const btn = document.getElementById('main-btn');
             btn.style.opacity = '0.5';
             btn.innerText = "DESCARGANDO...";
+            
+            // Intento de forzar la apertura del popunder al hacer clic
+            if(typeof popunder === 'function') {
+                popunder();
+            }
         }
     </script>
-
-    <!-- CONFIGURACIÓN DE PUBLICIDAD ADSTERRA (POPUNDER) -->
-    <script src="https://pl28962344.profitablecpmratenetwork.com/68/b1/10/68b110ce512cc50b2142462cc630aaba.js"></script>
 </body>
 </html>
 """
@@ -203,7 +207,6 @@ def process():
     
     try:
         if 'tiktok.com' in url.lower():
-            # API Directa de Extracción
             api_url = f"https://www.tikwm.com/api/?url={url}"
             req = urllib.request.Request(api_url, headers={'User-Agent': 'Mozilla/5.0'})
             
@@ -216,7 +219,6 @@ def process():
                 file_name = f"RICO_HD_{vid_id}.mp4"
                 full_path = os.path.join(temp_path, file_name)
                 
-                # Descarga del binario
                 video_req = urllib.request.Request(video_url, headers={'User-Agent': 'Mozilla/5.0'})
                 with urllib.request.urlopen(video_req) as v_res, open(full_path, 'wb') as f:
                     f.write(v_res.read())
@@ -236,5 +238,4 @@ def process():
         return f"Error en el servidor: {str(e)}", 500
 
 if __name__ == '__main__':
-    # Nota: En Render se usará Gunicorn, este bloque es para local
     app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
