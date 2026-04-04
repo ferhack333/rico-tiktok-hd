@@ -253,6 +253,11 @@ def clean_name(text):
 def index():
     return render_template_string(HTML)
 
+# ✅ ENDPOINT PARA UPTIMEROBOT - Evita que Render se duerma
+@app.route('/health')
+def health():
+    return {"status": "ok", "app": "RICO TikTok HD"}
+
 @app.route('/download', methods=['POST'])
 def process():
     url = request.form.get('url')
