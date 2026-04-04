@@ -7,23 +7,62 @@ from flask import Flask, render_template_string, request, send_file, after_this_
 
 app = Flask(__name__)
 
-# Interfaz visual de ULTRA TECNOLOGÍA - VERSIÓN RICO V2 + ADSTERRA OPTIMIZADO
 HTML = """
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RICO | TIKTOK HD</title>
+
+    <!-- SEO OPTIMIZADO -->
+    <title>Descargar Videos TikTok HD Sin Marca de Agua Gratis | RICO</title>
+    <meta name="description" content="Descarga videos de TikTok en HD sin marca de agua gratis. Solo pega el link y descarga al instante. Rápido, fácil y seguro. Sin registro.">
+    <meta name="keywords" content="descargar videos tiktok, tiktok sin marca de agua, descargar tiktok HD, tiktok downloader gratis, bajar videos tiktok, tiktok video downloader, descargar tiktok sin marca">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="RICO TikTok HD">
+    <link rel="canonical" href="https://rico-tiktok-hd.onrender.com/">
+
+    <!-- Open Graph para redes sociales -->
+    <meta property="og:title" content="Descargar Videos TikTok HD Sin Marca de Agua Gratis | RICO">
+    <meta property="og:description" content="Descarga videos de TikTok en HD sin marca de agua. Gratis, rápido y sin registro.">
+    <meta property="og:url" content="https://rico-tiktok-hd.onrender.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_MX">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Descargar Videos TikTok HD Sin Marca de Agua | RICO">
+    <meta name="twitter:description" content="Descarga videos de TikTok en HD sin marca de agua gratis.">
+
+    <!-- Schema.org para Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "RICO TikTok HD Downloader",
+      "url": "https://rico-tiktok-hd.onrender.com/",
+      "description": "Descarga videos de TikTok en HD sin marca de agua gratis",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "MXN"
+      }
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- SCRIPT DE PUBLICIDAD ADSTERRA (POPUNDER) - CARGA TEMPRANA -->
+
+    <!-- SCRIPT DE PUBLICIDAD ADSTERRA (POPUNDER) -->
     <script src="https://pl28962344.profitablecpmratenetwork.com/68/b1/10/68b110ce512cc50b2142462cc630aaba.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-        
+
         body {
             background: #000;
-            background-image: 
+            background-image:
                 radial-gradient(at 50% 50%, #1a365d 0%, transparent 50%),
                 radial-gradient(at 0% 0%, #d4af37 0%, transparent 20%);
             font-family: 'Orbitron', sans-serif;
@@ -126,6 +165,16 @@ HTML = """
             0%, 100% { top: 0%; }
             50% { top: 100%; }
         }
+
+        .seo-text {
+            color: rgba(212, 175, 55, 0.4);
+            font-size: 8px;
+            text-align: center;
+            margin-top: 1rem;
+            font-family: sans-serif;
+            line-height: 1.6;
+            letter-spacing: 0.05em;
+        }
     </style>
 </head>
 <body class="flex items-center justify-center">
@@ -133,13 +182,14 @@ HTML = """
 
     <div class="main-card overflow-hidden">
         <div class="scanner-line"></div>
-        
+
         <div class="text-center mb-10">
             <h1 class="text-7xl mb-2 gold-text italic">RICO</h1>
             <div class="flex justify-center gap-2 text-2xl mb-4">
                 <span>💰</span><span>💎</span><span>💵</span><span>💎</span><span>💰</span>
             </div>
             <p class="text-blue-400 text-[10px] tracking-[0.5em] font-bold uppercase">TikTok High-Tech Extractor</p>
+            <h2 class="text-yellow-600 text-[9px] tracking-widest mt-2 font-sans font-normal">Descargar videos TikTok HD sin marca de agua gratis</h2>
         </div>
 
         <form action="/download" method="POST" onsubmit="startProcessing()">
@@ -157,13 +207,17 @@ HTML = """
             <p class="text-yellow-400 text-xs font-bold animate-pulse">PROCESANDO RIQUEZA DIGITAL...</p>
         </div>
 
-        <div class="mt-10 pt-6 border-t border-yellow-900/30 text-center">
+        <!-- Texto SEO visible pero discreto -->
+        <p class="seo-text">
+            Descarga videos de TikTok sin marca de agua · HD gratis · Sin registro · Rápido y seguro
+        </p>
+
+        <div class="mt-4 pt-4 border-t border-yellow-900/30 text-center">
             <p class="text-[8px] text-yellow-800 tracking-[0.4em] uppercase">Security Level: Gold | Encryption: Active</p>
         </div>
     </div>
 
     <script>
-        // Lluvia de dinero
         const container = document.getElementById('money-bg');
         const emojis = ['💵', '💸', '💰', '💎'];
         for(let i=0; i<40; i++) {
@@ -182,8 +236,7 @@ HTML = """
             const btn = document.getElementById('main-btn');
             btn.style.opacity = '0.5';
             btn.innerText = "DESCARGANDO...";
-            
-            // Intento de forzar la apertura del popunder al hacer clic
+
             if(typeof popunder === 'function') {
                 popunder();
             }
@@ -204,38 +257,39 @@ def index():
 def process():
     url = request.form.get('url')
     temp_path = tempfile.gettempdir()
-    
+
     try:
         if 'tiktok.com' in url.lower():
             api_url = f"https://www.tikwm.com/api/?url={url}"
             req = urllib.request.Request(api_url, headers={'User-Agent': 'Mozilla/5.0'})
-            
+
             with urllib.request.urlopen(req) as response:
                 res_data = json.loads(response.read().decode())
-                
+
             if res_data.get('code') == 0:
                 video_url = res_data['data']['play']
                 vid_id = res_data['data']['id']
                 file_name = f"RICO_HD_{vid_id}.mp4"
                 full_path = os.path.join(temp_path, file_name)
-                
+
                 video_req = urllib.request.Request(video_url, headers={'User-Agent': 'Mozilla/5.0'})
                 with urllib.request.urlopen(video_req) as v_res, open(full_path, 'wb') as f:
                     f.write(v_res.read())
-                
+
                 @after_this_request
                 def cleanup(response):
                     if os.path.exists(full_path): os.remove(full_path)
                     return response
-                
+
                 return send_file(full_path, as_attachment=True)
             else:
                 return "Error: No se pudo obtener el video de TikTok.", 500
         else:
             return "Solo se aceptan links de TikTok.", 400
-            
+
     except Exception as e:
         return f"Error en el servidor: {str(e)}", 500
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
